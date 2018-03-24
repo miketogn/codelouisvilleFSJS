@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>Agenda Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Agenda Manager</h1>
+  
+      <!-- ********** Navigation ********** -->
+
+      <button id="add-agenda-button" class="btn btn-primary" onclick="handleAddAgendaClick()">Create New Agenda</button>
+
+       <!-- ********** Item Form ********** -->
+
+      <div id="form-container" class="panel hidden">
+
+        <form id="add-agenda-form">
+          <input type="hidden" id="agenda-id" value="" />
+          <div class="form-group">
+            <label for="agenda-title">Title</label>
+            <input type="text" class="form-control" id="agenda-title" placeholder="Title">
+          </div>
+          <button type="button" onclick="submitAgendaForm()" class="btn btn-success">Submit</button>
+          <button type="button" onclick="cancelAgendaForm()" class="btn btn-link">cancel</button>
+        </form>
+      
+      </div>
+
+      <!-- ********** Main Content Container ********** -->      
+
+      <div id="list-container"></div>
+
+      <!-- ********** Item Form ********** -->
+
+      <div id="item-form-container" class="panel hidden">
+        <form id="add-item-form">
+          
+          <input type="hidden" id="item-id" value="" />
+          <div class="form-group">
+            <label for="item-title">New Item</label>
+            <input type="text" class="form-control" id="item-title" placeholder="New Item">
+          </div>
+          <button type="button" onclick="submitItemForm()" class="btn btn-success">Submit</button>
+          <button type="button" onclick="cancelItemForm()" class="btn btn-link">cancel</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ********** Dynamic Content Template ********** -->
+
+    <script id="list-template" type="text/x-handlebars-template">
+      <ul class="list-group">
+        {{#each agendas}}
+        <li class="list-group-item">
+          <strong>{{title}}</strong> <!--- created: {{createdAt}}, updated: {{updatedAt}} -->
+          <span class="pull-right">
+            <button type="button" class="btn btn-xs btn-default" onclick="handleAddItemClick('{{_id}}')">Add Item</button>
+            <button type="button" class="btn btn-xs btn-default" onclick="handleEditAgendaClick('{{_id}}')">Edit Agenda</button>
+            <button type="button" class="btn btn-xs btn-default" onclick="handleDeleteAgendaClick('{{_id}}')">Delete Agenda</button>
+          </span>
+          <ul class="list-group">
+            {{#each items}}
+            <li class="list-group-item">
+              {{title}}
+              <span class="pull-right">
+                <!-- <button type="button" class="btn btn-xs btn-default" onclick="handleAddSubClick('{{_id}}')">Add Sub-item</button> -->
+                <button type="button" class="btn btn-xs btn-default" onclick="handleEditItemClick('{{../_id}}', '{{_id}}')">Edit Item</button>
+                <button type="button" class="btn btn-xs btn-default" onclick="handleDeleteItemClick('{{../_id}}', '{{_id}}')">Delete Item</button>
+              </span>
+              <ul class="list-group">
+                {{#each subs}}
+                <li class="list-group-item">
+                  {{title}}
+                  <!-- <span class="pull-right">
+                      <button type="button" class="btn btn-xs btn-default" onclick="handleAddSubClick('{{_id}}')">Edit Sub-item</button>
+                      <button type="button" class="btn btn-xs btn-default" onclick="handleEditItemClick('{{_id}}')">Delete Sub-item</button>
+                    </span> -->
+                </li class="list-group-item">
+                {{/each}}
+              </ul>
+            </li>
+            {{/each}}
+          </ul>
+        </li>
+        {{/each}}
+      </ul>
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+    <script src="/js/app.js"></script>
+
+  </body>
+</html>
