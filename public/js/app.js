@@ -34,7 +34,7 @@ function refreshAgendaList() {
 function handleAddAgendaClick() {
   console.log("Baby steps...");
   setFormData({});
-  toggleAddAgendaFormVisibility();  
+  // toggleAddAgendaFormVisibility();  
 }
 
 //******************************************************************
@@ -42,7 +42,7 @@ function handleAddAgendaClick() {
 function handleAddItemClick() {
   console.log("Baby steps...");
   setFormData({});
-  toggleAddItemFormVisibility();  
+  // toggleAddItemFormVisibility();  
 }
 
 //******************************************************************
@@ -93,13 +93,13 @@ function setItemFormData(agendaId, data) {
 //******************************************************************
 
 function cancelAgendaForm() {
-  toggleAddAgendaFormVisibility();
+  // toggleAddAgendaFormVisibility();
 }
 
 //******************************************************************
 
 function cancelItemForm() {
-  toggleAddItemFormVisibility();
+  // toggleAddItemFormVisibility();
 }
 
 //******************************************************************
@@ -110,7 +110,7 @@ function handleEditAgendaClick(id) {
   const agenda = window.agendaList.find(agenda => agenda._id === id);  
   if (agenda) {
     setFormData(agenda);
-    toggleAddAgendaFormVisibility();
+    // toggleAddAgendaFormVisibility();
   } 
 }
 
@@ -123,7 +123,7 @@ function handleEditItemClick(agendaId, id) {
   const item = agenda.items.find(item => item._id === id);
   if (item) {
     setItemFormData(agendaId, item);
-    toggleAddItemFormVisibility();
+    // toggleAddItemFormVisibility();
   } 
 }
 
@@ -136,7 +136,7 @@ function handleAddItemClick(id) {
   if (agenda) {
     console.log("you clicked add an item to the agenda with the id of ", id);
     setFormData(agenda);
-    toggleAddItemFormVisibility();
+    // toggleAddItemFormVisibility();
   } 
 }
 
@@ -175,7 +175,7 @@ function submitItemForm() {
     .done(function(response) {
       console.log("We have posted the data");
       refreshAgendaList();
-      toggleAddItemFormVisibility();
+      // toggleAddItemFormVisibility();
     })
     .fail(function(error) {
       console.log("Failures at posting, we are", error);
@@ -215,7 +215,7 @@ function submitAgendaForm() {
     .done(function(response) {
       console.log("We have posted the data");
       refreshAgendaList();
-      toggleAddAgendaFormVisibility();
+      // toggleAddAgendaFormVisibility();
     })
     .fail(function(error) {
       console.log("Failures at posting, we are", error);

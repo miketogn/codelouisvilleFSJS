@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <title>Agenda Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -13,11 +15,42 @@
   
       <!-- ********** Navigation ********** -->
 
-      <button id="add-agenda-button" class="btn btn-primary" onclick="handleAddAgendaClick()">Create New Agenda</button>
+      <p><button id="add-agenda-button" class="btn btn-primary" onclick="handleAddAgendaClick()" data-toggle="modal" data-target="#myModal2">Create Agenda</button></p>
 
-       <!-- ********** Item Form ********** -->
+       <!-- ********** Agenda Form ********** -->
 
-      <div id="form-container" class="panel hidden">
+       <div class="modal fade" id="myModal2" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agendas</h4>
+              </div>
+              <div class="modal-body">
+
+                  <div id="form-container" class="panel">
+
+                      <form id="add-agenda-form">
+                        <input type="hidden" id="agenda-id" value="" />
+                        <div class="form-group">
+                          <label for="agenda-title">Title</label>
+                          <input type="text" class="form-control" id="agenda-title" placeholder="Title">
+                        </div>
+                      </form>                    
+                    </div>                  
+              </div>
+              <div class="modal-footer">
+                  <button type="button" onclick="submitAgendaForm()" class="btn btn-success" data-dismiss="modal">Submit</button>
+                  <button type="button" onclick="cancelAgendaForm()" class="btn btn-link" data-dismiss="modal">cancel</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      <!-- <div id="form-container" class="panel hidden">
 
         <form id="add-agenda-form">
           <input type="hidden" id="agenda-id" value="" />
@@ -29,7 +62,7 @@
           <button type="button" onclick="cancelAgendaForm()" class="btn btn-link">cancel</button>
         </form>
       
-      </div>
+      </div> -->
 
       <!-- ********** Main Content Container ********** -->      
 
@@ -37,7 +70,38 @@
 
       <!-- ********** Item Form ********** -->
 
-      <div id="item-form-container" class="panel hidden">
+      
+
+      <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Items</h4>
+              </div>
+              <div class="modal-body">
+                  <div id="item-form-container" class="panel">
+                    <form id="add-item-form">                      
+                      <input type="hidden" id="item-id" value="" />
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="item-title" placeholder="New Item">
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              <div class="modal-footer">
+                  <button type="button" onclick="submitItemForm()" class="btn btn-success" data-dismiss="modal">Submit</button>
+                  <button type="button" onclick="cancelItemForm()" class="btn btn-link" data-dismiss="modal">cancel</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      <!-- <div id="item-form-container" class="panel hidden">
         <form id="add-item-form">
           
           <input type="hidden" id="item-id" value="" />
@@ -48,7 +112,7 @@
           <button type="button" onclick="submitItemForm()" class="btn btn-success">Submit</button>
           <button type="button" onclick="cancelItemForm()" class="btn btn-link">cancel</button>
         </form>
-      </div>
+      </div> -->
     </div>
 
     <!-- ********** Dynamic Content Template ********** -->
@@ -59,19 +123,28 @@
         <li class="list-group-item">
           <strong>{{title}}</strong> <!--- created: {{createdAt}}, updated: {{updatedAt}} -->
           <span class="pull-right">
-            <button type="button" class="btn btn-xs btn-default" onclick="handleAddItemClick('{{_id}}')">Add Item</button>
-            <button type="button" class="btn btn-xs btn-default" onclick="handleEditAgendaClick('{{_id}}')">Edit Agenda</button>
-            <button type="button" class="btn btn-xs btn-default" onclick="handleDeleteAgendaClick('{{_id}}')">Delete Agenda</button>
+              <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle" 
+                          data-toggle="dropdown" 
+                          aria-expanded="false" 
+                          type="button">Options <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li role="presentation"><a href="#" onclick="handleAddItemClick('{{_id}}')" data-toggle="modal" data-target="#myModal">Add Item</a></li>
+                      <li role="presentation"><a href="#" onclick="handleEditAgendaClick('{{_id}}')" data-toggle="modal" data-target="#myModal2">Edit Agenda</a></li>
+                      <li role="presentation"><a href="#" onclick="handleDeleteAgendaClick('{{_id}}')">Delete Agenda</a></li>
+                  </ul>
+              </div>           
           </span>
-          <ul class="list-group">
+          <ul class="list-group padding">
             {{#each items}}
             <li class="list-group-item">
-              {{title}}
+              <div>{{title}}
               <span class="pull-right">
                 <!-- <button type="button" class="btn btn-xs btn-default" onclick="handleAddSubClick('{{_id}}')">Add Sub-item</button> -->
-                <button type="button" class="btn btn-xs btn-default" onclick="handleEditItemClick('{{../_id}}', '{{_id}}')">Edit Item</button>
-                <button type="button" class="btn btn-xs btn-default" onclick="handleDeleteItemClick('{{../_id}}', '{{_id}}')">Delete Item</button>
-              </span>
+                <button type="button" class="btn btn-xs btn-secondary" onclick="handleEditItemClick('{{../_id}}', '{{_id}}')" title="Edit This Item"  data-toggle="modal" data-target="#myModal"><i class="material-icons md-18">edit</i></button>
+                <button type="button" class="btn btn-xs btn-secondary" onclick="handleDeleteItemClick('{{../_id}}', '{{_id}}')"title="Delete This Item"><i class="material-icons md-18">delete</i></button>
+              </span></div>
               <ul class="list-group">
                 {{#each subs}}
                 <li class="list-group-item">
@@ -92,6 +165,7 @@
     </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
     <script src="/js/app.js"></script>
 
