@@ -8,7 +8,11 @@ npm start to run the application.
 
 open localhost:3030 in a browser to interact with the project. 
 
+My original intent for this project was to create a system to manage agenda content for my neighborhood HOA board.  Thanks to the advise of my mentors, it very quickly became an exercise in manipulating nested content inside the database, which was alot more complicated that I first expected.  My intention is continue to expand this project into my original concept.
+
 future updates will include:
+  * improvements to the UI
+  * migration to vue js for the front end.
   * each agenda will be displayed seperately.  
   * user authentication.
   * addition of sub-items.
