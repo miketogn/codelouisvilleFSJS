@@ -139,12 +139,12 @@
           <ul class="list-group padding">
             {{#each items}}
             <li class="list-group-item">
-              <div>{{title}}
+              {{title}}
               <span class="pull-right">
                 <!-- <button type="button" class="btn btn-xs btn-default" onclick="handleAddSubClick('{{_id}}')">Add Sub-item</button> -->
                 <button type="button" class="btn btn-xs btn-secondary" onclick="handleEditItemClick('{{../_id}}', '{{_id}}')" title="Edit This Item"  data-toggle="modal" data-target="#myModal"><i class="material-icons md-18">edit</i></button>
                 <button type="button" class="btn btn-xs btn-secondary" onclick="handleDeleteItemClick('{{../_id}}', '{{_id}}')"title="Delete This Item"><i class="material-icons md-18">delete</i></button>
-              </span></div>
+              </span>
               <ul class="list-group">
                 {{#each subs}}
                 <li class="list-group-item">
