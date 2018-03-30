@@ -7,6 +7,7 @@
     <title>Agenda Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="/css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -120,7 +121,7 @@
     <script id="list-template" type="text/x-handlebars-template">
       <ul class="list-group">
         {{#each agendas}}
-        <li class="list-group-item">
+        <li class="list-group-item  w3-card-4">
           <strong>{{title}}</strong> <!--- created: {{createdAt}}, updated: {{updatedAt}} -->
           <span class="pull-right">
               <div class="dropdown">
