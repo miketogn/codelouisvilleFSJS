@@ -1,4 +1,4 @@
-# agenda
+# Agenda Manager - My FSJS Project
 
 Database is hosted on mlab.com so no local mongo installation is required. 
 
