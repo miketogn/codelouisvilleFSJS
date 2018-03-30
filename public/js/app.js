@@ -84,6 +84,7 @@ function setItemFormData(agendaId, data) {
     title: data.title || '',
     _id: data._id || '',
   };
+  agendaId = agendaId || '';
 
   $('#agenda-id').val(agendaId);
   $('#item-title').val(item.title);
@@ -135,7 +136,7 @@ function handleAddItemClick(id) {
   const agenda = window.agendaList.find(agenda => agenda._id === id);
   if (agenda) {
     console.log("you clicked add an item to the agenda with the id of ", id);
-    setFormData(agenda);
+    setItemFormData(agenda._id);
     // toggleAddItemFormVisibility();
   } 
 }
@@ -175,6 +176,8 @@ function submitItemForm() {
     .done(function(response) {
       console.log("We have posted the data");
       refreshAgendaList();
+      setItemFormData();
+      
       // toggleAddItemFormVisibility();
     })
     .fail(function(error) {
